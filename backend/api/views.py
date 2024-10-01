@@ -13,12 +13,16 @@ class ListaBancoCriado(generics.ListCreateAPIView):
     def get_queryset(self):
         user = self.request.user
         return ContaBanco.objects.filter(usuario_id=user)
-    
+
+class CreateBancoView(generics.CreateAPIView):
+    serializer_class= BancoSerializer
+    permission_classes= [IsAuthenticated]
+
     def perform_create(self, serializer):
         if serializer.is_valid():
             serializer.save(usuario_id=self.request.user)
         else:
-            print(serializer.errors)
+            print(serializer.erros)
 
 class DeletaBanco(generics.DestroyAPIView):
     serializer_class = BancoSerializer
@@ -28,10 +32,6 @@ class DeletaBanco(generics.DestroyAPIView):
         user = self.request.user
         return ContaBanco.objects.filter(usuario_id=user)
     
-
-    
-
-# Create your views here.
 class CreateUserView(generics.CreateAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer

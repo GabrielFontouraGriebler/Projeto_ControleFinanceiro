@@ -5,6 +5,7 @@ import Register from "./pages/Register"
 import Home from "./pages/Home"
 import NotFound from "./pages/NotFound"
 import ProtectedRout from "./components/ProtectedRoute"
+import CreateBanco from "./pages/CreateBanco"
 
 function Logout() {
   localStorage.clear()
@@ -31,6 +32,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/logout" element={<Logout />} />
         <Route path="/register" element={<RegisterAndLogout />} />
+        <Route path="/banco/cadastro" element={<CreateBanco />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
