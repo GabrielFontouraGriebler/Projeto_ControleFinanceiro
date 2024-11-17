@@ -18,3 +18,30 @@ class ContaBanco(models.Model):
 
     def __str__(self): 
         return self.nome
+
+class ControleUsuarioModel(models.Model):
+    usuario_id = models.ForeignKey(User, on_delete=models.CASCADE)
+    criado_em = models.DateTimeField(auto_now_add=True)
+    atualizado_em = models.DateField(auto_now=True)
+
+    class Meta:
+        abstract = True
+
+class Categoria(ControleUsuarioModel):
+    TIPO_CATEGORIA = {
+        "despesa":"Despesa",
+        "receita":"Receita"
+    }
+    nome = models.CharField(max_length=100)
+    tipo_categoria = models.CharField(max_length=150, choices=TIPO_CATEGORIA)
+
+    def __str__(self):
+        return self.nome
+
+class Subcategoria(ControleUsuarioModel):
+    nome = models.CharField(max_length=100)
+    categoria_id = models.ForeignKey(Categoria, on_delete=models.CASCADE, related_name="categorias")
+
+
+    def __str__(self):
+        return self.nome

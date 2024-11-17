@@ -14,11 +14,11 @@ function CreateBanco() {
   const createBanco = (e) => {
     e.preventDefault();
     api
-      .post("/api/bancos/cadastro", { nome, tipo_conta, saldo_inicial })
+      .post("/api/bancos/cadastro/", { nome, tipo_conta, saldo_inicial })
       .then((res) => {
         if (res.status === 201) {
           alert("Banco criado!");
-          navigate("/");
+          navigate("/bancos");
         } else {
           alert("Falhou em criar o banco.");
         }

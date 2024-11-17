@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User
 from rest_framework import serializers
-from .models import ContaBanco
+from .models import ContaBanco, Categoria, Subcategoria
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
@@ -17,3 +17,14 @@ class BancoSerializer(serializers.ModelSerializer):
         model = ContaBanco
         fields = ["id","nome","tipo_conta","saldo_inicial","data_criacao","usuario_id"]
         extra_kwargs = {"usuario_id": {"read_only": True}}
+
+class CategoriaSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Categoria
+        fields = ["id", "nome", "tipo_categoria"]
+
+class SubcategoriaSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Subcategoria
+        fields = ["id", "nome", "categoria_id"]
+        extra_kwargs = {"categoria_id": {"read_only": True}}
