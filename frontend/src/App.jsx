@@ -1,6 +1,6 @@
 import react from "react"
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom"
-import { Home, Login, CriarCategoria, Bancos, CreateBanco, NotFound, Register, Categorias, CriarSubategoria} from './pages';
+import { Home, Login, CriarCategoria, Bancos, CreateBanco, NotFound, Register, Categorias, CriarSubategoria, Cartoes, ListagemFatura, ListagemTransacao, CriarTransacao, CriarCartaoCredito} from './pages';
 import {Navbar, MainLayout, ProtectedRout} from "./components";
 
 
@@ -65,10 +65,50 @@ function App() {
             } 
           />
           <Route 
-            path="/subcategoria/cadastro" 
+            path="/subcategoria/cadastro/:categoriaId" 
             element={
               <ProtectedRout>
                 <CriarSubategoria />
+              </ProtectedRout>
+            } 
+          />
+          <Route 
+            path="/transacoes" 
+            element={
+              <ProtectedRout>
+                <ListagemTransacao />
+              </ProtectedRout>
+            } 
+          />
+          <Route 
+            path="/transacao/cadastro" 
+            element={
+              <ProtectedRout>
+                <CriarTransacao />
+              </ProtectedRout>
+            } 
+          />
+          <Route 
+            path="/cartoes/:id/faturas" 
+            element={
+              <ProtectedRout>
+                <ListagemFatura />
+              </ProtectedRout>
+            } 
+          />
+          <Route 
+            path="/cartoes" 
+            element={
+              <ProtectedRout>
+                <Cartoes />
+              </ProtectedRout>
+            } 
+          />
+          <Route 
+            path="/cartao/cadastro" 
+            element={
+              <ProtectedRout>
+                <CriarCartaoCredito />
               </ProtectedRout>
             } 
           />

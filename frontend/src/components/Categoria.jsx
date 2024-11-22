@@ -1,12 +1,12 @@
 import React  from "react";
 import { useNavigate } from "react-router-dom";
 
-function Categoria({categoria, subcategoria, onDelete}) {
+function Categoria({categoria, subcategoria, onDelete, onDeleteSubcategoria}) {
 
     const navigate = useNavigate();
 
     const handleAddSubcategoria = (categoriaId) => {
-        navigate(`/subcategoria/cadastro?${categoriaId}`)
+        navigate(`/subcategoria/cadastro/${categoriaId}`)
     }
 
     const subcategoriasFiltro = Array.isArray(subcategoria)
@@ -35,7 +35,7 @@ function Categoria({categoria, subcategoria, onDelete}) {
                             <p className="subcategoria-nome">{sub.nome}</p>
                             <button 
                                 className="delete-sucategoria-button"
-                                onDelete={() => console.log(`Deletar subcategoria ${sub.id}`)}
+                                onClick={() => onDeleteSubcategoria(sub.id)}
                             >
                                 Deletar
                             </button>

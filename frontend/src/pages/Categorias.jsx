@@ -50,7 +50,7 @@ function Categorias() {
     const deletarSubcategoria = (id) => {
         api
             .delete(`/api/subcategorias/deleta/${id}/`)
-            .then((ress) => {
+            .then((res) => {
                 if (res.status === 204) alert("Subcategoria deletada!");
                 else alert("Falhou ao deletar a categoria.")
                 getSubcategoria();
@@ -74,7 +74,8 @@ function Categorias() {
               <Categoria 
                 categoria={categoria} 
                 subcategoria={subcategoria}
-                onDelete={deletarCategoria} 
+                onDelete={deletarCategoria}
+                onDeleteSubcategoria={deletarSubcategoria} 
                 key={categoria.id} 
               />
             ))}
