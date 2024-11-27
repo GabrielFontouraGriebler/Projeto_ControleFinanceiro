@@ -1,0 +1,106 @@
+.banco-page {
+  background-color: #F7F7F7; /* Cor de fundo suave */
+  font-family: Arial, sans-serif; /* Fonte padrão */
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh; /* Garantir que ocupe toda a altura da tela */
+}
+
+/* Container principal do banco */
+.banco-container {
+  background-color: #E5E1DA; /* Cor de fundo do bloco */
+  border: 2px solid #B3C8CF; /* Bordas suaves */
+  border-radius: 15px; /* Cantos arredondados */
+  padding: 20px 30px; /* Espaçamento interno */
+  width: 600px; /* Largura fixa */
+  height: auto;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Sombra suave */
+  text-align: center; /* Centraliza o texto */
+  transition: transform 0.2s ease, box-shadow 0.2s ease; /* Animação suave */
+  margin-bottom: 20px; /* Espaçamento entre blocos */
+}
+
+/* Hover para destaque */
+.banco-container:hover {
+  transform: scale(1.02); /* Leve aumento no tamanho */
+  box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.15); /* Sombra mais intensa */
+}
+
+/* Estilo das informações */
+.banco-tipo-conta,
+.banco-saldo-inicial,
+.banco-saldo-data {
+  font-size: 1em; /* Tamanho padrão da fonte */
+  margin: 10px 0; /* Espaçamento vertical */
+  color: #4F5D64; /* Cor do texto */
+}
+
+.banco-nome {
+  font-size: 1.3em;
+  font-weight: bolder;
+}
+
+.banco-titulo {
+  margin-top: 40px;
+  margin-bottom: 20px;
+}
+
+.banco-tipo-conta {
+  font-weight: bolder; /* Negrito para o tipo de conta */
+}
+
+/* Botão de deletar */
+.delete-button {
+  background-color: #B3C8CF; /* Fundo do botão */
+  color: #fff; /* Texto branco */
+  border: none; /* Remove bordas padrão */
+  border-radius: 5px; /* Cantos arredondados */
+  padding: 10px 20px; /* Espaçamento interno */
+  font-size: 1em; /* Tamanho da fonte */
+  cursor: pointer; /* Muda o cursor ao passar o mouse */
+  transition: background-color 0.3s ease; /* Animação suave */
+  margin-top: 10px; /* Espaçamento superior */
+}
+
+/* Hover para o botão */
+.delete-button:hover {
+  background-color: #89A8B2; /* Altera a cor ao passar o mouse */
+}
+
+/* Botão fixo de criação (caso queira incluir um botão flutuante) */
+.create-banco {
+  position: fixed; /* Fixa a posição na tela */
+  bottom: 20px; /* Distância da borda inferior */
+  right: 20px; /* Distância da borda direita */
+  background-color: #B3C8CF; /* Cor de fundo */
+  color: white; /* Cor do texto */
+  border: none; /* Remove bordas padrão */
+  border-radius: 60%; /* Torna o botão circular */
+  width: 140px; /* Largura do botão */
+  height: 80px; /* Altura do botão */
+  display: flex; /* Centraliza o conteúdo do botão */
+  justify-content: center; /* Centraliza horizontalmente */
+  align-items: center; /* Centraliza verticalmente */
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Sombra suave */
+  cursor: pointer; /* Muda o cursor ao passar o mouse */
+  z-index: 1000; /* Garante que o botão fique sobreposto a outros elementos */
+  transition: background-color 0.3s ease; /* Animação suave para hover */
+  font-size: 1rem;
+}
+
+/* Estilo ao passar o mouse */
+.create-banco:hover {
+  background-color: #89A8B2; /* Cor ao passar o mouse */
+}
+
+/* Ajustes para a visualização em grid */
+.banco-grid-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 bancos por linha */
+  gap: 20px;
+  padding: 20px;
+  background-color: #f7f7f7;
+}

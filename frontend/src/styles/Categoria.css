@@ -1,0 +1,87 @@
+body {
+  background: #f7f7f7;
+}
+
+.categoria-grid-container {
+  display: grid;
+  gap: 20px; /* Espaçamento entre os itens */
+  padding: 10px; /* Espaçamento interno */
+  justify-content: center; /* Alinhamento inicial dos itens */
+  background-color: #f7f7f7;
+  margin-right: 300px;
+}
+
+.categoria-page {
+  background-color: #f7f7f7; /* Cor de fundo suave */
+  margin: 40px 40px;
+  display: flex;
+  flex-direction: column;
+}
+
+.categoria-titulo {
+  margin-right: 350px;
+  margin-bottom: 20px;
+  justify-content: center;
+  display: flex;
+}
+
+.create-categoria {
+  margin-left: 265px;
+}
+
+/* Estilização do container de cada categoria */
+.categoria-container {
+  background-color: #e9efec; /* Cor de fundo suave */
+  border: 2px solid #c4dad2; /* Bordas com cor intermediária */
+  border-radius: 20px; /* Cantos arredondados */
+  padding: 20px 100px 20px 20px; /* Espaçamento interno */
+  text-align: left; /* Texto alinhado à esquerda */
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave */
+  font-family: Arial, sans-serif; /* Fonte padrão */
+  margin-left: 240px;
+}
+
+/* Nome da categoria */
+.categoria-nome {
+  font-size: 1.5em; /* Texto maior */
+  font-weight: bold; /* Destaque */
+  color: #3c3d37; /* Cor principal */
+  margin-bottom: 10px; /* Espaçamento inferior */
+}
+
+/* Subcategorias dentro da categoria */
+.subcategoria-container {
+  background-color: #f7f7f7; /* Fundo mais claro para destacar */
+  border: 1px solid #b3c8cf; /* Bordas levemente destacadas */
+  border-radius: 10px; /* Cantos arredondados */
+  padding: 15px; /* Espaçamento interno */
+  margin-top: 10px; /* Espaçamento entre categorias e subcategorias */
+}
+
+.subcategoria-nome {
+  font-size: 1.2em; /* Texto menor que a categoria */
+  font-weight: normal; /* Sem negrito */
+  color: #4f5d64; /* Cor levemente mais escura */
+}
+
+/* Botão de deletar e criar */
+.delete-sucategoria-button,
+.create-categoria,
+.adicionar-subcategoria-button {
+  background-color: #b3c8cf; /* Fundo do botão */
+  color: #fff; /* Texto branco */
+  border: none; /* Remove bordas padrão */
+  border-radius: 5px; /* Cantos arredondados */
+  padding: 10px 20px;
+  font-size: 1em;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-left: 10px;
+  margin-top: 10px;
+}
+
+.ddelete-sucategoria-button:hover,
+.create-categoria:hover,
+.adicionar-subcategoria-button:hover {
+  background-color: #89a8b2;
+}

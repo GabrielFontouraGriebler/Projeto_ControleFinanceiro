@@ -1,0 +1,62 @@
+/* Estilo geral */
+.fatura-page-contianer {
+  background-color: #f7f7f7; /* Cor de fundo suave */
+  font-family: Arial, sans-serif; /* Fonte padrão */
+  margin: 20px 20px;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Container principal da fatura */
+.fatura-container {
+  background-color: #e5e1da; /* Cor de fundo do bloco */
+  border: 2px solid #b3c8cf; /* Bordas suaves */
+  border-radius: 15px; /* Cantos arredondados */
+  padding: 20px 100px; /* Espaçamento interno */
+  width: 500px; /* Largura fixa para centralizar o conteúdo */
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Sombra suave */
+  text-align: center; /* Centraliza o texto */
+  transition: transform 0.2s ease, box-shadow 0.2s ease; /* Animação suave */
+}
+
+/* Hover para destaque */
+.fatura-container:hover {
+  transform: scale(1.02); /* Leve aumento no tamanho */
+  box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.15); /* Sombra mais intensa */
+}
+
+/* Estilo das informações */
+.fatura-fechamento,
+.fatura-vencimento,
+.fatura-paga,
+.fatura-total {
+  font-size: 1em; /* Tamanho padrão da fonte */
+  margin: 10px 0; /* Espaçamento vertical */
+  color: #4f5d64; /* Cor do texto */
+}
+
+/* Destaque para valores */
+.fatura-total {
+  font-weight: bold; /* Negrito */
+  color: #3c3d37; /* Cor mais escura */
+}
+
+/* Destaque para status */
+.fatura-paga {
+  color: #3c763d; /* Verde para status pago */
+}
+
+.fatura-paga:before {
+  content: "● "; /* Adiciona um ponto antes do status */
+  color: #ffd700; /* Cor do ponto para dar destaque */
+}
+
+.fatura-titulo {
+  margin-right: 200px;
+  margin-bottom: 30px;
+  margin-top: 55px;
+  display: flex;
+  justify-content: center;
+}

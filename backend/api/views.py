@@ -1,10 +1,15 @@
 from django.shortcuts import render
 from django.contrib.auth.models import User
 from rest_framework import generics
-from .serializers import UserSerializer, BancoSerializer, CategoriaSerializer, SubcategoriaSerializer, TransacaoSerializer, FaturaSerializer, CartaoCreditoSerializer
+from .serializers import UserSerializer, BancoSerializer, CategoriaSerializer, SubcategoriaSerializer, TransacaoSerializer, FaturaSerializer, CartaoCreditoSerializer, GraficoTransacaoSerializer
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from .models import ContaBanco, Categoria, Subcategoria, Transacao, Fatura, CartaoCredito
 from rest_framework.exceptions import ValidationError;
+from rest_framework.response import Response
+from django.db.models import Sum, Q
+from django.db.models.functions import TruncMonth
+from datetime import datetime
+
 
 
 class ListaBancoCriado(generics.ListCreateAPIView):
@@ -136,8 +141,13 @@ class DeletarTransacao(generics.DestroyAPIView):
     
     def perform_destroy(self, instance):
         if instance.parcela_origem is None:
-            instance.parcelas.all().delete()
-        super().perform_destroy(instance)
+            if instance.numero_parcelas == 0:
+                super().perform_destroy(instance)
+            else:
+                instance.parcelas.all().delete()
+                super().perform_destroy(instance)
+        else:
+            super().perform_destroy(instance)
 
 class ListarFatura(generics.ListCreateAPIView):
     serializer_class = FaturaSerializer
@@ -177,6 +187,45 @@ class DeletarCartaoCredito(generics.DestroyAPIView):
     def get_queryset(self):
         user = self.request.user
         return CartaoCredito.objects.filter(usuario_id=user)
+    
+class GraficoTransacaoView(generics.ListAPIView):
+    serializer_class = GraficoTransacaoSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        user = self.request.user
+        queryset = (
+            Transacao.objects.filter(usuario_id=user)
+            .exclude(Q(tipo_transacao='credito', parcela_origem__isnull=True))
+            .values(mes=TruncMonth('data'))
+            .annotate(total=Sum('valor'))
+            .order_by('mes')
+        )
+        return queryset
+    
+class SaldoAtualView(generics.ListAPIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        user = request.user
+        # Filtro para incluir apenas as transações até o mês atual
+        despesas = Transacao.objects.filter(
+            usuario_id=user,
+            tipo_financeiro='despesa',
+        ).exclude(Q(tipo_transacao='credito', parcela_origem__isnull=True)).aggregate(total_despesas=Sum('valor'))['total_despesas'] or 0
+
+        receitas = Transacao.objects.filter(
+            usuario_id=user,
+            tipo_financeiro='receita',
+        ).exclude(Q(tipo_transacao='credito', parcela_origem__isnull=True)).aggregate(total_receitas=Sum('valor'))['total_receitas'] or 0
+
+        saldo_inicial_banco = ContaBanco.objects.filter(
+            usuario_id=user
+        ).aggregate(total_saldo_inicial=Sum('saldo_inicial'))['total_saldo_inicial'] or 0
+
+        saldo_atual = receitas - despesas + saldo_inicial_banco
+        
+        return Response({'saldo_atual': saldo_atual})
 
 
 

@@ -2,6 +2,7 @@ import react from "react"
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom"
 import { Home, Login, CriarCategoria, Bancos, CreateBanco, NotFound, Register, Categorias, CriarSubategoria, Cartoes, ListagemFatura, ListagemTransacao, CriarTransacao, CriarCartaoCredito} from './pages';
 import {Navbar, MainLayout, ProtectedRout} from "./components";
+import "../src/styles/App.css"
 
 
 function Logout() {

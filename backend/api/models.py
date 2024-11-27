@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from dateutil.relativedelta import relativedelta
+from django.db.models import Sum, Q
 import datetime
 
 # Create your models here.
@@ -98,14 +99,26 @@ class Fatura(ControleUsuarioModel):
     data_fechamento = models.DateField()
     data_vencimento = models.DateField()
     paga = models.BooleanField(default=False)
+    valor_total = models.DecimalField(max_digits=10, decimal_places=2, default=0.0)
 
     def calcular_total(self):
-        return sum(transacao.valor for transacao in self.transacao.all())
+        total = self.transacoes.aggregate(Sum('valor'))['valor__sum'] or 0.0
+        return total
         
     def __str__(self):
         return f'Fatura de {self.cartao_credito.nome_cartao} - Fechamento: {self.data_fechamento}'
         
 class Transacao(ControleUsuarioModel):
+    TIPO_FINANCEIRO_CHOICES = [
+        ("despesa", "Despesa"),
+        ("receita", "Receita")
+    ]
+
+    tipo_financeiro = models.CharField(
+        max_length=20,
+        choices=TIPO_FINANCEIRO_CHOICES,
+        default="despesa"  # Valor padrão como 'despesa'
+    )
     tipo_transacao = models.CharField(max_length=50, choices=[
         ("debito", "Débito"),
         ("credito", "Crédito")

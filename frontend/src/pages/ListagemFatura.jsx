@@ -1,30 +1,41 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { Fatura } from "../components";
+import api from "../api";
 
 function ListagemFatura() {
-    const {id} = useParams();
-    const {faturas, setFaturas} = useState([]);
+  const { id } = useParams();
+  const [faturas, setFaturas] = useState([]);
 
-    useEffect(() => {
-        fetch(`api/cartoes/${id}/faturas/`)
-        .then((ress) => ress.json())
-        .then((data) => setFaturas(data))
-        .catch((err) => console.error("Erro ao bucar faturas: ", err));
-    }, [id]);
+  const getFaturas = () => {
+    api
+      .get(`/api/cartoes/${id}/faturas/`) // Requisição com o Axios
+      .then((res) => res.data) // Extrai os dados da resposta
+      .then((data) => {
+        console.log("Dados recebidos:", data);
+        setFaturas(data);
+      })
+      .catch((err) => {
+        console.error("Erro ao buscar faturas: ", err);
+        alert("Erro ao buscar faturas: " + err.message);
+      });
+  };
 
-    return (
-        <div>
-            <h2>Faturas do Cartão de Crédito</h2>
-            {Array.isArray(faturas) && faturas.length > 0 ? (
-                faturas.map((fatura) => (
-                    <Fatura key={fatura.id} fatura={fatura} />
-                ))
-            ) : (
-                <p>Nenhuma fatura encontrada para este cartão.</p>
-            )}
-        </div>
-    );
+  // useEffect que utiliza a função de requisição
+  useEffect(() => {
+    getFaturas();
+  }, [id]);
+
+  return (
+    <div className="fatura-page">
+      <h2 className="fatura-titulo">Faturas do Cartão de Crédito</h2>
+      {Array.isArray(faturas) && faturas.length > 0 ? (
+        faturas.map((fatura) => <Fatura key={fatura.id} fatura={fatura} />)
+      ) : (
+        <p>Nenhuma fatura encontrada para este cartão.</p>
+      )}
+    </div>
+  );
 }
 
 export default ListagemFatura;
